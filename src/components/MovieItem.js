@@ -4,8 +4,13 @@ const MovieItem = ({ movie }) => {
   return (
     <div>
       <p>{movie.name}</p>
-      <button>watched</button>
-      <button>Delete</button>
+      <button type="button" class="btn btn-primary">
+        watched
+      </button>
+      <a> </a>
+      <button type="button" class="btn btn-danger">
+        Delete
+      </button>
     </div>
   );
 };
