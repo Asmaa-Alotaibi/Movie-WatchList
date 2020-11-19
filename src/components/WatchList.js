@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import movies from '../movies.js'
+import AddField from './AddField.js'
 import MovieItem from './MovieItem.js'
 
 const WatchList = () => {
@@ -20,7 +21,7 @@ const WatchList = () => {
   }
 
   const watchList = _movies
-    .filter((movie) => movie.watched)
+    .filter((movie) => !movie.watched)
     .map((movie, index) => (
       <MovieItem
         movie={movie}
@@ -31,7 +32,7 @@ const WatchList = () => {
     ))
 
   const watched = _movies
-    .filter((movie) => !movie.watched)
+    .filter((movie) => movie.watched)
     .map((movie, index) => (
       <MovieItem
         movie={movie}
@@ -40,18 +41,17 @@ const WatchList = () => {
         deleteMovie={deleteMovie}
       />
     ))
-  //const [_movies, setMovie] = useState(_movies)
 
   return (
     <div>
       <div>
+        <AddField _movies={_movies} setMovie={setMovie} />
         <div className='container px-lg-5'>
           <div className='row'>
-            Watchlist{' '}
+            Watchlist
             <span className='badge badge-Light  badge-pill'>
-              {' '}
-              {watchList.length}{' '}
-            </span>{' '}
+              {watchList.length}
+            </span>
           </div>
           <div className='row'>
             <div className='col py-3 px-lg-5 border bg-light '>{watchList}</div>
