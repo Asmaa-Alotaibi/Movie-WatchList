@@ -1,27 +1,35 @@
-import React, { useState } from 'react'
-import movies from '../movies.js'
-import AddField from './AddField.js'
-import MovieItem from './MovieItem.js'
+import React, { useState } from "react";
+import movies from "../movies.js";
+import AddField from "./AddField.js";
+import MovieItem from "./MovieItem.js";
+import SearchBar from "./SearchBar.js";
 
 const WatchList = () => {
-  const [_movies, setMovie] = useState(movies)
+  const [_movies, setMovie] = useState(movies);
 
   const deleteMovie = (movie) => {
-    const deletedList = _movies.filter((m) => m !== movie)
-    setMovie(deletedList)
-    console.log(_movies)
-  }
+    const deletedList = _movies.filter((m) => m !== movie);
+    setMovie(deletedList);
+    console.log(_movies);
+  };
   const watchedButton = (movie) => {
     setMovie(
       _movies.map((m) => {
-        if (m === movie) m.watched = !m.watched
-        return m
+        if (m === movie) m.watched = !m.watched;
+        return m;
       })
-    )
-  }
+    );
+  };
+
+  const [query1, setQuery1] = useState("");
+  const [query2, setQuery2] = useState("");
+  // const SearchedList = movies
+  //   .filter((movie) => movie.name.includes(query))
+  //   .map((movie, index) => <MovieItem movie={movie} key={index} />);
+  const found = (movie) => {};
 
   const watchList = _movies
-    .filter((movie) => !movie.watched)
+    .filter((movie) => !movie.watched && movie.name.includes(query1))
     .map((movie, index) => (
       <MovieItem
         movie={movie}
@@ -29,10 +37,9 @@ const WatchList = () => {
         watchedButton={watchedButton}
         deleteMovie={deleteMovie}
       />
-    ))
-
+    ));
   const watched = _movies
-    .filter((movie) => movie.watched)
+    .filter((movie) => movie.watched && movie.name.includes(query2))
     .map((movie, index) => (
       <MovieItem
         movie={movie}
@@ -40,38 +47,44 @@ const WatchList = () => {
         watchedButton={watchedButton}
         deleteMovie={deleteMovie}
       />
-    ))
+    ));
 
   return (
     <div>
       <div>
         <AddField _movies={_movies} setMovie={setMovie} />
-        <div className='container px-lg-5'>
-          <div className='row'>
+        <div className="container px-lg-5">
+          <div className="row">
             Watchlist
-            <span className='badge badge-Light  badge-pill'>
+            <span className="badge badge-Light  badge-pill">
               {watchList.length}
             </span>
+            <SearchBar setQuery={setQuery1} />
           </div>
-          <div className='row'>
-            <div className='col py-3 px-lg-5 border bg-light '>{watchList}</div>
+          <div className="row">
+            <div className="col py-3 px-lg-5 border bg-light ">
+              {watchList.length !== 0 ? watchList : "No Movie Found !"}{" "}
+            </div>
           </div>
         </div>
-        <div className='container px-lg-5'>
-          <div className='row'>
-            Watched{' '}
-            <span className='badge badge-primery  badge-pill'>
-              {' '}
-              {watched.length}{' '}
+        <div className="container px-lg-5">
+          <div className="row">
+            Watched{" "}
+            <span className="badge badge-primery  badge-pill">
+              {" "}
+              {watched.length}{" "}
             </span>
+            <SearchBar setQuery={setQuery2} />
           </div>
-          <div className='row'>
-            <div className='col py-3 px-lg-5 border bg-light '>{watched}</div>
+          <div className="row">
+            <div className="col py-3 px-lg-5 border bg-light ">
+              {watched.length !== 0 ? watched : "No Movie Found !"}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default WatchList
+export default WatchList;
