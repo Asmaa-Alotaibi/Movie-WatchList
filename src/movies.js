@@ -1,7 +1,7 @@
 const movies = [
-  { name: 'bs ya ba7r', watched: false },
-  { name: 'sing', watched: true },
-  { name: 'harry potter', watched: false },
-]
+  { id: 1, name: "bs ya ba7r", watched: false },
+  { id: 2, name: "sing", watched: true },
+  { id: 3, name: "harry potter", watched: false },
+];
 
-export default movies
+export default movies;

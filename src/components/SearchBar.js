@@ -1,4 +1,5 @@
 import React from "react";
+import { observer } from "mobx-react";
 
 const SearchBar = ({ setQuery }) => (
   <input
@@ -7,4 +8,4 @@ const SearchBar = ({ setQuery }) => (
   />
 );
 
-export default SearchBar;
+export default observer(SearchBar);

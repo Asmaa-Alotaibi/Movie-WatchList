@@ -1,43 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import movieStore from "../stores/MovieStore";
 
-const AddField = ({ _movies, setMovie }) => {
+const AddField = ({ _movies }) => {
   //initial movie
   const [movieAdded, setMovieAdded] = useState({
-    name: '',
+    name: "",
     watched: false,
-  })
+  });
 
   //from input
   const handleChange = (event) => {
-    setMovieAdded({ ...movieAdded, [event.target.name]: event.target.value })
-  }
+    setMovieAdded({ ...movieAdded, [event.target.name]: event.target.value });
+  };
 
   // handle submit
   const handleSubmit = () => {
-    setMovie([..._movies, movieAdded])
-  }
+    movieStore["createMovie"](movieAdded);
+  };
+
   return (
-    <div style={{ width: '30%', margin: '40px' }} className='container px-lg-5'>
-      <div className='input-group mb-3'>
+    <div style={{ width: "30%", margin: "40px" }} className="container px-lg-5">
+      <div className="input-group mb-3">
         <input
-          type='text'
-          className='form-control'
-          placeholder='Add movie...'
-          name='name'
-          aria-describedby='basic-addon2'
+          type="text"
+          className="form-control"
+          placeholder="Add movie..."
+          name="name"
+          aria-describedby="basic-addon2"
           onChange={handleChange}
         />
-        <div className='input-group-append'>
+        <div className="input-group-append">
           <button
-            className='btn btn-outline-secondary'
-            type='button'
-            onClick={handleSubmit}>
+            className="btn btn-outline-secondary"
+            type="button"
+            onClick={handleSubmit}
+          >
             Add
           </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AddField
+export default AddField;
